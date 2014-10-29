@@ -1,0 +1,154 @@
+// variables
+
+c_white = #ffffff
+c_black = #333333
+c_orange = #dc572e
+c_gray = #dedede
+c_gray_dark = #b5b5b5
+
+fw_normal = 300
+fw_bold = 600
+
+
+
+html
+    margin 0px
+    background none
+
+body
+    padding 100px 0px
+    background-color #F49F24
+    // background-image url('images/HITSA_buff.jpg')
+    background-attachment fixed
+
+    // font-family 'Helvetica Neue', Helvetica, Arial, sans-serif
+    font-family 'Open Sans', Helvetica, Arial, sans-serif
+    font-weight fw_normal
+    font-size 18px
+    line-height 22px
+
+    @media (max-width: 768px)
+        background c_white
+
+
+
+a
+    color c_black
+    outline none
+
+    &:hover
+    &:active
+    &:focus
+        outline none
+        color c_orange
+        text-decoration none
+
+.file
+
+    &:hover
+        color red
+        text-decoration line-through
+
+
+
+h1
+    margin-top 50px
+    margin-bottom 100px
+    color c_gray_dark
+    font-weight fw_normal
+    font-size 40px
+    line-height 50px
+
+    a
+        color c_black
+        font-size 40px
+        line-height 50px
+
+        &:hover
+            color c_orange
+
+
+
+h2
+    margin-top 100px
+    margin-bottom 0px
+    color c_gray_dark
+    font-size 30px
+    line-height 30px
+
+
+
+p
+    margin-top 0px
+    margin-bottom 50px
+
+
+
+.spacer
+    height 50px
+
+
+
+.btn-danger
+    color red
+    outline 0px
+
+    &:hover
+    &:active
+        color red
+        outline 0px
+
+
+
+#content
+    padding-top 100px
+    padding-bottom 100px
+    background-color c_white
+    box-shadow 0px 0px 20px rgba(21, 22, 22, 0.6)
+
+    @media (max-width: 768px)
+        margin-top 0px
+        margin-bottom 0px
+
+
+
+#application
+    label
+        margin-top 20px
+        margin-bottom 5px
+        font-weight fw_normal
+
+    select
+        border-color c_gray_dark
+        outline none
+        box-shadow none
+
+        &:focus
+            outline none
+            border-color c_orange
+            outline 0px
+
+    input
+    textarea
+        padding 5px 1px
+        border-radius 0px
+        border none
+        border-bottom solid 1px c_gray_dark
+        outline none
+        box-shadow none
+        font-size 18px
+
+        &:focus
+            color c_orange
+            border-color c_orange
+            outline 0px
+
+        &[type=file]
+            border none
+            color c_white
+
+        &[readonly]
+            background-color c_white
+
+    button
+        margin-top 100px

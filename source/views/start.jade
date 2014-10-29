@@ -1,0 +1,23 @@
+script(type='text/ng-template', id='start')
+
+  .row
+    h1.col-xs-12.col-sm-10.col-sm-offset-1.text-center(ng-show='!sent')
+      |ProgeTiiger õpilaskonkurss
+      br
+      b Tuleviku õpperuum 2050
+      br
+      | hääletus
+    h1.col-xs-12.col-sm-10.col-sm-offset-1.text-center(ng-show='sent') Täname!
+
+  .row
+    p.text-center.col-xs-12.col-sm-8.col-sm-offset-2(ng-show='!sent') Hääletuse kutse saamiseks sisesta enda e-posti aadress. Kutse saadetakse sellele e-postile. Muuks me seda aadressi ei kasuta.
+    p.text-center.col-xs-12.col-sm-8.col-sm-offset-2(ng-show='sent') Kutse saadeti aadressile {{ email }}.
+
+  form#application.row(ng-show='!sent')
+    .form-group.col-xs-12.col-sm-4.col-sm-offset-4
+      label.control-label(for='email') E-post
+      input.form-control(id='email', type='email', ng-model='email', ng-show='!sending')
+      input.form-control(id='email', type='email', ng-model='email', ng-show='sending', readonly, disabled)
+
+    button.col-xs-10.col-sm-4.col-xs-offset-1.col-sm-offset-4.btn.btn-lg.btn-success(ng-show='!sending && !sent', ng-click='sendLink()') Saada kutse
+    button.col-xs-10.col-sm-4.col-xs-offset-1.col-sm-offset-4.btn.btn-lg.btn-success.disabled(ng-show='sending && !sent') Saadan ...
