@@ -123,3 +123,46 @@ p
 
 .work
     margin-top 30px
+
+
+
+#application
+    label
+        margin-top 20px
+        margin-bottom 5px
+        font-weight fw_normal
+
+    select
+        border-color c_gray_dark
+        outline none
+        box-shadow none
+
+        &:focus
+            outline none
+            border-color c_orange
+            outline 0px
+
+    input
+    textarea
+        padding 5px 1px
+        border-radius 0px
+        border none
+        border-bottom solid 1px c_gray_dark
+        outline none
+        box-shadow none
+        font-size 18px
+
+        &:focus
+            color c_orange
+            border-color c_orange
+            outline 0px
+
+        &[type=file]
+            border none
+            color c_white
+
+        &[readonly]
+            background-color c_white
+
+    button
+        margin-top 100px
