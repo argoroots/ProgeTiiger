@@ -8,6 +8,12 @@ script(type='text/ng-template', id='voting')
       br
       | hääletus
 
+  .row
+    p.col-xs-12.col-sm-8.col-sm-offset-2.text-center
+      b Anna oma hääl nendele töödele, mis väärivad Sinu arvates kohta finaalis Tallinna Lauluväljakul 24. jaanuaril 2015.
+
+  .spacer
+
   ul.nav.nav-pills.nav-justified(role="tablist")
     li(ng-repeat='(agegroup, a) in agegroups', ng-class='selected_agegroup == agegroup ? "active" : ""')
       a(href='javascript:void(0);', ng-click='doSelect(agegroup)') {{ agegroup }}

@@ -134,7 +134,7 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
                                             data   : getSignedData(API_USER, API_KEY, {
                                                 'to': $scope.email,
                                                 'subject': 'ProgeTiiger õpilaskonkurss "Tuleviku õpperuum 2050" hääletus',
-                                                'message': 'Siin on teie personaalne link ProgeTiiger õpilaskonkurss "Tuleviku õpperuum 2050" hääletusele.<br>\n<br>\n<a href="' + url + '">' + url + '</a><br>\n<br>\nÄrge seda linki jagage!'
+                                                'message': 'Siin on Sinu personaalne link ProgeTiiger õpilaskonkurss "Tuleviku õpperuum 2050" hääletusele.<br>\n<br>\n<a href="' + url + '">' + url + '</a><br>\n<br>\nÄra seda linki jaga!'
                                             })
                                         })
                                         .success(function(data) {

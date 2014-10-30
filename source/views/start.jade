@@ -8,7 +8,7 @@ script(type='text/ng-template', id='start')
     h1.col-xs-12.col-sm-10.col-sm-offset-1.text-center(ng-show='sent') Täname!
 
   .row
-    p.text-center.col-xs-12.col-sm-8.col-sm-offset-2(ng-show='!sent') Hääletuse kutse saamiseks sisesta enda e-posti aadress. Kutse saadetakse sellele e-postile. Muuks me seda aadressi ei kasuta.
+    p.text-center.col-xs-12.col-sm-8.col-sm-offset-2(ng-show='!sent') Hääletuse kutse saamiseks sisesta palun oma e-posti aadress. Saadame kutse sinu e-postile ja muuks me seda aadressi ei kasuta.
     p.text-center.col-xs-12.col-sm-8.col-sm-offset-2(ng-show='sent') Kutse saadeti aadressile {{ email }}.
 
   form#application.row(ng-show='!sent')
