@@ -104,6 +104,7 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
                     url    : API_URL + 'entity-747',
                     data   : getSignedData(API_USER, API_KEY, {
                         'definition': 'pd-voter',
+                        'pd-voter-email': $scope.email,
                         'pd-voter-entu-api-key': $scope.key
                     })
                 })
@@ -167,6 +168,7 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
         $scope.categories = {}
         $scope.agegroups = {}
         $scope.selected_agegroup = ''
+        $scope.votes = []
 
         $http({
                 method : 'GET',
@@ -174,6 +176,12 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
                 params : getSignedData($routeParams.voter_id, $routeParams.voter_key, {})
             })
             .success(function(data) {
+                if(data.result.properties['pd-work'].values) {
+                    for(i in data.result.properties['pd-work'].values) {
+                        $scope.votes.push(data.result.properties['pd-work'].values[i].db_value)
+                    }
+                }
+
                 $http({
                         method : 'GET',
                         url    : API_URL + 'entity-749/childs',
@@ -191,6 +199,7 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
                                 })
                                 .success(function(data) {
                                     $scope.works.push({
+                                        id           : data.result.id,
                                         category     : data.result.properties.category.values[0].value,
                                         title        : data.result.properties.title.values[0].value,
                                         author       : data.result.properties.author.values[0].value,
@@ -208,8 +217,7 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
                         }
                     })
                     .error(function(data) {
-                        cl(data)
-                        $location.path('/')
+                        cl(data.error)
                     })
             })
             .error(function(data) {
@@ -222,6 +230,15 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
             } else {
                 $scope.selected_agegroup = ''
             }
+        }
+
+        $scope.doVote = function(id) {
+            if($scope.votes.indexOf(id) > -1) {
+                $scope.votes.splice($scope.votes.indexOf(id), 1)
+            } else {
+                $scope.votes.push(id)
+            }
+            cl($scope.votes)
         }
 
     }])

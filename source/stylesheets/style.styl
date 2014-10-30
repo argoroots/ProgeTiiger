@@ -2,7 +2,7 @@
 
 c_white = #ffffff
 c_black = #333333
-c_orange = #dc572e
+c_orange = #f49f24
 c_gray = #dedede
 c_gray_dark = #b5b5b5
 
@@ -17,7 +17,7 @@ html
 
 body
     padding 100px 0px
-    background-color #F49F24
+    background-color c_orange
     // background-image url('images/HITSA_buff.jpg')
     background-attachment fixed
 
@@ -97,10 +97,22 @@ p
 i
     color c_gray_dark
 
+button
+    outline none !important
+
+
 
 
 ul.nav-pills li.active a
-    background #F49F24 !important
+    background c_orange !important
+    color c_white
+
+button.voted
+    background c_orange !important
+    color c_white !important
+    font-weight fw_bold
+    border 0px
+    outline none !important
 
 
 
