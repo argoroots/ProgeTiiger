@@ -17,9 +17,9 @@ script(type='text/ng-template', id='voting')
 
   .row.work(ng-repeat-end, ng-repeat='work in works | filter:{category:category, agegroup:selected_agegroup}')
     .col-xs-12
-      button.btn.btn-default.btn-lg.col-xs-1 +1
+      button.btn.btn-default.btn-lg.col-xs-2.col-sm-1 +1
 
-      .col-xs-11
+      .col-xs-10.col-sm-11
         h3
           a.col-xs-12(href="{{ work.url }}", target="_blank") {{ work.title }}
         .col-xs-12 {{ work.author }} - {{ work.organization }}
