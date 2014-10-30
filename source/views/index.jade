@@ -1,5 +1,5 @@
 doctype html
-html(ng-app='s3cApp')
+html(ng-app='pdApp')
   head
 
     title ProgeTiiger
@@ -21,9 +21,9 @@ html(ng-app='s3cApp')
     #wrapper
       #content.container
         .row
-          img.col-xs-6.col-sm-4.col-xs-offset-3.col-sm-offset-4(src='images/ProgeTiiger_Logo_web.jpg')
+          img.col-xs-10.col-sm-6.col-md-4.col-xs-offset-1.col-sm-offset-3.col-md-offset-4(src='images/ProgeTiiger_Logo_horisontaal_EST_web.jpg')
 
         div(ng-view, autoscroll='true')
 
     include start
-    include application
+    include voting
