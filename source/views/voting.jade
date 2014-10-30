@@ -12,7 +12,7 @@ script(type='text/ng-template', id='voting')
     li(ng-repeat='(agegroup, a) in agegroups', ng-class='selected_agegroup == agegroup ? "active" : ""')
       a(href='javascript:void(0);', ng-click='doSelect(agegroup)') {{ agegroup }}
 
-  .row(ng-repeat-start='(category, c) in categories', ng-if='works')
+  .row(ng-repeat-start='(category, c) in categories', ng-show='(works | filter:{category:category, agegroup:selected_agegroup}).length > 0')
     h2.col-xs-12 {{ category }}
 
   .row.work(ng-repeat-end, ng-repeat='work in works | filter:{category:category, agegroup:selected_agegroup}')
@@ -23,3 +23,4 @@ script(type='text/ng-template', id='voting')
         h3
           a.col-xs-12(href="{{ work.url }}", target="_blank") {{ work.title }}
         .col-xs-12 {{ work.author }} - {{ work.organization }}
+        i.col-xs-12(ng-if='!selected_agegroup') {{ work.agegroup }}
