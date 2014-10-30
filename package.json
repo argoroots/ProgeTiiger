@@ -7,12 +7,14 @@
     "grunt": "*",
     "grunt-contrib-clean": "*",
     "grunt-contrib-connect": "*",
+    "grunt-contrib-copy": "*",
     "grunt-contrib-cssmin": "*",
     "grunt-contrib-jade": "*",
     "grunt-contrib-less": "*",
     "grunt-contrib-stylus": "*",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "*",
+    "grunt-font-awesome-vars": "*",
     "grunt-include-replace": "*"
   }
 }

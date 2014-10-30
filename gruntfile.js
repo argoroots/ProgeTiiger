@@ -5,6 +5,15 @@ module.exports = function (grunt) {
                 src: 'tmp'
             },
         },
+        copy: {
+            font_awesome: {
+                cwd: 'bower_components/font-awesome',
+                src: ['fonts/*.*'],
+                dest: 'fonts',
+                expand: true,
+                flatten: true,
+            },
+        },
         jade: {
             html: {
                 options: {
@@ -28,6 +37,21 @@ module.exports = function (grunt) {
                 }
             }
         },
+        fontAwesomeVars: {
+            font_awesome: {
+                variablesLessPath: 'bower_components/font-awesome/less/variables.less',
+                fontPath: '/fonts'
+            }
+        },
+        less: {
+            font_awesome: {
+                files: {
+                    'tmp/font-awesome.css': [
+                        'bower_components/font-awesome/less/font-awesome.less'
+                    ]
+                }
+            }
+        },
         cssmin : {
             frameworks: {
                 options: {
@@ -36,6 +60,7 @@ module.exports = function (grunt) {
                 files: {
                     'tmp/stylesheet.css': [
                         'bower_components/bootstrap/dist/css/bootstrap.css',
+                        'tmp/font-awesome.css',
                         'tmp/application.css'
                     ]
                 }
@@ -90,8 +115,11 @@ module.exports = function (grunt) {
         }
     })
 
+
+
     grunt.loadNpmTasks('grunt-contrib-clean')
     grunt.loadNpmTasks('grunt-contrib-connect')
+    grunt.loadNpmTasks('grunt-contrib-copy')
     grunt.loadNpmTasks('grunt-contrib-cssmin')
     grunt.loadNpmTasks('grunt-contrib-jade')
     grunt.loadNpmTasks('grunt-contrib-less')
@@ -104,7 +132,7 @@ module.exports = function (grunt) {
     grunt.registerTask(
         'build',
         'Compiles all of the assets and copies the files to the build directory. Cleanup all mess.',
-        ['clean', 'jade', 'stylus', 'cssmin', 'uglify', 'includereplace']
+        ['clean', 'copy', 'jade', 'stylus', 'fontAwesomeVars', 'less', 'cssmin', 'uglify', 'includereplace']
     )
 
     grunt.registerTask(

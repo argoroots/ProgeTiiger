@@ -23,10 +23,11 @@ script(type='text/ng-template', id='voting')
 
   .row.work(ng-repeat-end, ng-repeat='work in works | filter:{category:category, agegroup:selected_agegroup}')
     .col-xs-12
-      button.btn.btn-default.btn-lg.col-xs-2.col-sm-1(ng-click='doVote(work.id)', ng-class='votes.indexOf(work.id) > -1 ? "voted" : ""') +1
+      button.btn.btn-default.btn-lg.col-xs-2.col-sm-1(ng-click='doVote(work.id)', ng-class='votes.indexOf(work.id) > -1 ? "voted" : ""')
+        i.fa.fa-thumbs-o-up
 
       .col-xs-10.col-sm-11
         h3
           a.col-xs-12(href="{{ work.url }}", target="_blank") {{ work.title }}
         .col-xs-12 {{ work.author }} - {{ work.organization }}
-        i.col-xs-12(ng-if='!selected_agegroup') {{ work.agegroup }}
+        span.col-xs-12(ng-if='!selected_agegroup') {{ work.agegroup }}
