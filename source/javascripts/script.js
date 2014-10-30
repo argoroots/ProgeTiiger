@@ -36,6 +36,16 @@ function makeKey() {
 
 
 
+function mySort(array, attribute) {
+    array.sort(function(a, b){
+        if(a[attribute].toUpperCase() > b[attribute].toUpperCase()) return 1
+        if(a[attribute].toUpperCase() < b[attribute].toUpperCase()) return -1
+    })
+    return array
+}
+
+
+
 var PAGE_URL          = 'http://hitsa.github.io/ProgeTiiger/'
 var API_URL           = 'https://hitsa.entu.ee/api2/'
 var API_USER          = 746
@@ -61,6 +71,24 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
                 redirectTo: '/voting'
             })
     }])
+
+    .filter('orderObjectBy', function(){
+         return function(input, attribute) {
+            if (!angular.isObject(input)) return input
+
+            var array = []
+            for(var objectKey in input) {
+                array.push(input[objectKey])
+            }
+
+            array.sort(function(a, b){
+                a = parseInt(a[attribute])
+                b = parseInt(b[attribute])
+                return a - b
+            })
+            return array
+         }
+    })
 
 
 
@@ -138,6 +166,7 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
         $scope.works = []
         $scope.categories = {}
         $scope.agegroups = {}
+        $scope.selected_agegroup = ''
 
         $http({
                 method : 'GET',
@@ -169,6 +198,7 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
                                         url          : data.result.properties.url.values[0].value,
                                         agegroup     : data.result.properties.agegroup.values[0].value
                                     })
+                                    $scope.works = mySort($scope.works, 'title')
                                     $scope.categories[data.result.properties.category.values[0].value] = null
                                     $scope.agegroups[data.result.properties.agegroup.values[0].value] = null
                                 })
@@ -185,5 +215,13 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
             .error(function(data) {
                 $location.path('/voting')
             })
+
+        $scope.doSelect = function(agegroup) {
+            if($scope.selected_agegroup != agegroup) {
+                $scope.selected_agegroup = agegroup
+            } else {
+                $scope.selected_agegroup = ''
+            }
+        }
 
     }])

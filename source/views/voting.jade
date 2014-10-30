@@ -1,6 +1,6 @@
 script(type='text/ng-template', id='voting')
 
-  //- pre.row {{ works | json }}
+  //- pre.row {{ selected_agegroup | json }}
 
   .row
     h1.col-xs-12.col-sm-10.col-sm-offset-1.text-center
@@ -8,12 +8,16 @@ script(type='text/ng-template', id='voting')
       br
       | hääletus
 
-  .row(ng-repeat-start='(category, c) in categories')
+  ul.nav.nav-pills.nav-justified(role="tablist")
+    li(ng-repeat='(agegroup, a) in agegroups', ng-class='selected_agegroup == agegroup ? "active" : ""')
+      a(href='javascript:void(0);', ng-click='doSelect(agegroup)') {{ agegroup }}
+
+  .row(ng-repeat-start='(category, c) in categories', ng-if='works')
     h2.col-xs-12 {{ category }}
 
-  .row.work(ng-repeat-end, ng-repeat='work in works | filter:{category:category} | orderBy:title')
+  .row.work(ng-repeat-end, ng-repeat='work in works | filter:{category:category, agegroup:selected_agegroup}')
     .col-xs-12
-      button.col-xs-1.btn.btn-default.btn-lg +1
+      button.btn.btn-default.btn-lg.col-xs-1 +1
 
       .col-xs-11
         h3
