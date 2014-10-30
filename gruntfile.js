@@ -40,7 +40,7 @@ module.exports = function (grunt) {
         fontAwesomeVars: {
             font_awesome: {
                 variablesLessPath: 'bower_components/font-awesome/less/variables.less',
-                fontPath: '/fonts'
+                fontPath: 'fonts'
             }
         },
         less: {
