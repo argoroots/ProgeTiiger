@@ -46,7 +46,7 @@ function mySort(array, attribute) {
 
 
 
-var PAGE_URL          = 'http://hitsa.github.io/ProgeTiiger/'
+var PAGE_URL          = 'http://konkurss.progetiiger.ee/'
 var API_URL           = 'https://hitsa.entu.ee/api2/'
 var API_USER          = 746
 var API_KEY           = 'qb8z5GGdFxvnMKxRN6N3vuj3kUB47LKk'
