@@ -142,18 +142,22 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
                                             $scope.sent = true
                                         })
                                         .error(function(data) {
+                                            cl(data.error)
                                             $scope.sending = false
                                         })
                                 })
                                 .error(function(data) {
+                                    cl(data.error)
                                     $scope.sending = false
                                 })
                         })
                         .error(function(data) {
+                            cl(data.error)
                             $scope.sending = false
                         })
                 })
                 .error(function(data) {
+                    cl(data.error)
                     $scope.sending = false
                 })
         }
@@ -168,7 +172,7 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
         $scope.categories = {}
         $scope.agegroups = {}
         $scope.selected_agegroup = ''
-        $scope.votes = []
+        $scope.votes = {}
 
         $http({
                 method : 'GET',
@@ -178,7 +182,7 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
             .success(function(data) {
                 if(data.result.properties['pd-work'].values) {
                     for(i in data.result.properties['pd-work'].values) {
-                        $scope.votes.push(data.result.properties['pd-work'].values[i].db_value)
+                        $scope.votes[data.result.properties['pd-work'].values[i].db_value] = data.result.properties['pd-work'].values[i].id
                     }
                 }
 
@@ -233,12 +237,37 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
         }
 
         $scope.doVote = function(id) {
-            if($scope.votes.indexOf(id) > -1) {
-                $scope.votes.splice($scope.votes.indexOf(id), 1)
+            var properties = {}
+
+            if($scope.votes[id]) {
+                properties['pd-voter-pd-work.' + $scope.votes[id]] = ''
+                $http({
+                        method : 'PUT',
+                        url    : API_URL + 'entity-' + $routeParams.voter_id,
+                        data   : getSignedData($routeParams.voter_id, $routeParams.voter_key, properties)
+                    })
+                    .success(function(data) {
+                        delete $scope.votes[id]
+                    })
+                    .error(function(data) {
+                        cl(data.error)
+                    })
             } else {
-                $scope.votes.push(id)
+                properties['pd-voter-pd-work'] = id
+                $http({
+                        method : 'PUT',
+                        url    : API_URL + 'entity-' + $routeParams.voter_id,
+                        data   : getSignedData($routeParams.voter_id, $routeParams.voter_key, properties)
+                    })
+                    .success(function(data) {
+                        var work = data.result.properties['pd-voter-pd-work'][0].value
+                        var vote = data.result.properties['pd-voter-pd-work'][0].id
+                        $scope.votes[work] = vote
+                    })
+                    .error(function(data) {
+                        cl(data.error)
+                    })
             }
-            cl($scope.votes)
         }
 
     }])
