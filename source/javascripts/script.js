@@ -1,8 +1,13 @@
+var PAGE_URL = 'http://konkurss.progetiiger.ee/'
+var API_URL  = 'https://hitsa.entu.ee/api2/'
+var API_USER = 746
+var API_KEY  = 'qb8z5GGdFxvnMKxRN6N3vuj3kUB47LKk'
+
+
+
 function cl(d) {
     console.log(d)
 }
-
-
 
 function getSignedData(user, key, data) {
     if(!user || !key) return
@@ -22,7 +27,9 @@ function getSignedData(user, key, data) {
     return data
 }
 
-
+function md5(data) {
+    return CryptoJS.enc.Hex.stringify(CryptoJS.MD5(data))
+}
 
 function makeKey() {
     var text = ''
@@ -34,8 +41,6 @@ function makeKey() {
     return text
 }
 
-
-
 function mySort(array, attribute) {
     array.sort(function(a, b){
         if(a[attribute].toUpperCase() > b[attribute].toUpperCase()) return 1
@@ -45,11 +50,6 @@ function mySort(array, attribute) {
 }
 
 
-
-var PAGE_URL          = 'http://konkurss.progetiiger.ee/'
-var API_URL           = 'https://hitsa.entu.ee/api2/'
-var API_USER          = 746
-var API_KEY           = 'qb8z5GGdFxvnMKxRN6N3vuj3kUB47LKk'
 
 angular.module('pdApp', ['ngRoute', 'ngResource'])
 

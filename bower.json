@@ -9,6 +9,6 @@
     "angular-route": "1.*",
     "bootstrap": "3.*",
     "font-awesome": "4.*",
-    "crypto-js": "http://crypto-js.googlecode.com/files/CryptoJS%20v3.1.2.zip"
+    "crypto-js": "https://crypto-js.googlecode.com/files/CryptoJS%20v3.1.2.zip"
   }
 }
