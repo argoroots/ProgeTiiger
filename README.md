@@ -1,4 +1,4 @@
-# ProgeTiiger voting page
+# ProgeTiiger Voting Page
 
 - Data is hosted by [Entu](http://www.entu.ee)
 - Page is hosted by [GitHub pages](https://pages.github.com)
