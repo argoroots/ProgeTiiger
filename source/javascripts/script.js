@@ -59,23 +59,23 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
     .config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
         // $locationProvider.html5Mode(true)
         $routeProvider
-            // .when('/voting', {
-            //     templateUrl: 'start',
-            //     controller: 'startCtrl'
-            // })
-            // .when('/voting/:voter_id/:voter_key', {
-            //     templateUrl: 'voting',
-            //     controller: 'votingCtrl'
-            // })
+            .when('/voting', {
+                templateUrl: 'start',
+                controller: 'startCtrl'
+            })
+            .when('/voting/:voter_id/:voter_key', {
+                templateUrl: 'voting',
+                controller: 'votingCtrl'
+            })
             .when('/end', {
                 templateUrl: 'end',
             })
-            // .otherwise({
-            //     redirectTo: '/voting'
-            // })
             .otherwise({
-                redirectTo: '/end'
+                redirectTo: '/voting'
             })
+            // .otherwise({
+            //     redirectTo: '/end'
+            // })
     }])
 
     .filter('orderObjectBy', function(){
