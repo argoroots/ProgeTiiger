@@ -127,7 +127,11 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
                             })
                         })
                         .success(function(data) {
+                            console.log(data)
+                            console.log($scope.id)
+                            console.log($scope.key)
                             var url = PAGE_URL + '#/voting/' + $scope.id + '/' + $scope.key
+                            console.log(url)
                             $http({
                                     method : 'POST',
                                     url    : API_URL + 'entity-' + $scope.id + '/rights',
