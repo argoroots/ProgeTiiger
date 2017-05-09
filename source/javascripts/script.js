@@ -118,7 +118,7 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
                 })
                 .then(function(response) {
                     $scope.id = response.data.result.id
-                    cl(data)
+                    cl(response.data)
                     cl($scope.id)
                     $http({
                             method : 'POST',
@@ -129,7 +129,7 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
                             })
                         })
                         .then(function(response) {
-                            cl(data)
+                            cl(response.data)
                             cl($scope.id)
                             cl($scope.key)
                             var url = PAGE_URL + '#/voting/' + $scope.id + '/' + $scope.key
