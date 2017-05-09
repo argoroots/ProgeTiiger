@@ -116,10 +116,10 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
                         'pd-voter-entu-api-key': $scope.key
                     })
                 })
-                .success(function(data) {
+                .then(function(data) {
                     $scope.id = data.result.id
-                    console.log(data)
-                    console.log($scope.id)
+                    cl(data)
+                    cl($scope.id)
                     $http({
                             method : 'POST',
                             url    : API_URL + 'entity-' + $scope.id + '/rights',
@@ -128,12 +128,12 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
                                 'right': 'expander'
                             })
                         })
-                        .success(function(data) {
-                            console.log(data)
-                            console.log($scope.id)
-                            console.log($scope.key)
+                        .then(function(data) {
+                            cl(data)
+                            cl($scope.id)
+                            cl($scope.key)
                             var url = PAGE_URL + '#/voting/' + $scope.id + '/' + $scope.key
-                            console.log(url)
+                            cl(url)
                             $http({
                                     method : 'POST',
                                     url    : API_URL + 'entity-' + $scope.id + '/rights',
@@ -141,7 +141,7 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
                                         'entity': API_USER
                                     })
                                 })
-                                .success(function(data) {
+                                .then(function(data) {
                                     $http({
                                             method : 'POST',
                                             url    : API_URL + 'email',
@@ -151,26 +151,22 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
                                                 'message': 'Siin on Sinu personaalne link ProgeTiiger õpilaskonkurss "Tuleviku õpperuum 2050" hääletusele.<br>\n<br>\n<a href="' + url + '">' + url + '</a><br>\n<br>\nÄra seda linki jaga!'
                                             })
                                         })
-                                        .success(function(data) {
+                                        .then(function(data) {
                                             $scope.sending = false
                                             $scope.sent = true
-                                        })
-                                        .error(function(data) {
+                                        }, function(data) {
                                             cl(data.error)
                                             $scope.sending = false
                                         })
-                                })
-                                .error(function(data) {
+                                }, function(data) {
                                     cl(data.error)
                                     $scope.sending = false
                                 })
-                        })
-                        .error(function(data) {
+                        }, function(data) {
                             cl(data.error)
                             $scope.sending = false
                         })
-                })
-                .error(function(data) {
+                }, function(data) {
                     cl(data.error)
                     $scope.sending = false
                 })
@@ -193,7 +189,7 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
                 url    : API_URL + 'entity-' + $routeParams.voter_id,
                 params : getSignedData($routeParams.voter_id, $routeParams.voter_key, {})
             })
-            .success(function(data) {
+            .then(function(data) {
                 if(data.result.properties['pd-work'].values) {
                     for(i in data.result.properties['pd-work'].values) {
                         $scope.votes[data.result.properties['pd-work'].values[i].db_value] = data.result.properties['pd-work'].values[i].id
@@ -208,14 +204,14 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
                             limit: '1000'
                         })
                     })
-                    .success(function(data) {
+                    .then(function(data) {
                         for (id in data.result['pd-work'].entities) {
                             $http({
                                     method : 'GET',
                                     url    : API_URL + 'entity-' + data.result['pd-work'].entities[id].id,
                                     params : getSignedData(API_USER, API_KEY, {})
                                 })
-                                .success(function(data) {
+                                .then(function(data) {
                                     $scope.works.push({
                                         id           : data.result.id,
                                         category     : data.result.properties.category.values[0].value,
@@ -228,17 +224,14 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
                                     $scope.works = mySort($scope.works, 'title')
                                     $scope.categories[data.result.properties.category.values[0].value] = null
                                     $scope.agegroups[data.result.properties.agegroup.values[0].value] = null
-                                })
-                                .error(function(data) {
+                                }, function(data) {
                                     cl(data.error)
                                 })
                         }
-                    })
-                    .error(function(data) {
+                    }, function(data) {
                         cl(data.error)
                     })
-            })
-            .error(function(data) {
+            }, function(data) {
                 $location.path('/voting')
             })
 
@@ -260,11 +253,10 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
                         url    : API_URL + 'entity-' + $routeParams.voter_id,
                         data   : getSignedData($routeParams.voter_id, $routeParams.voter_key, properties)
                     })
-                    .success(function(data) {
-                        delete $scope.votes[id]
-                    })
-                    .error(function(data) {
-                        cl(data.error)
+                    .then(function(data) {
+                          delete $scope.votes[id]
+                      }, function(data) {
+                          cl(data.error)
                     })
             } else {
                 properties['pd-voter-pd-work'] = id
@@ -273,13 +265,12 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
                         url    : API_URL + 'entity-' + $routeParams.voter_id,
                         data   : getSignedData($routeParams.voter_id, $routeParams.voter_key, properties)
                     })
-                    .success(function(data) {
-                        var work = data.result.properties['pd-voter-pd-work'][0].value
-                        var vote = data.result.properties['pd-voter-pd-work'][0].id
-                        $scope.votes[work] = vote
-                    })
-                    .error(function(data) {
-                        cl(data.error)
+                    .then(function(data) {
+                          var work = data.result.properties['pd-voter-pd-work'][0].value
+                          var vote = data.result.properties['pd-voter-pd-work'][0].id
+                          $scope.votes[work] = vote
+                      }, function(data) {
+                          cl(data.error)
                     })
             }
         }
