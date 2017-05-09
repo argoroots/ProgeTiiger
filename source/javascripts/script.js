@@ -57,7 +57,7 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
 
 // ROUTER
     .config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-        // $locationProvider.html5Mode(true)
+        $locationProvider.html5Mode(true)
         $routeProvider
             .when('/voting', {
                 templateUrl: 'start',
