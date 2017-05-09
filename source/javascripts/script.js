@@ -118,6 +118,8 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
                 })
                 .success(function(data) {
                     $scope.id = data.result.id
+                    console.log(data)
+                    console.log($scope.id)
                     $http({
                             method : 'POST',
                             url    : API_URL + 'entity-' + $scope.id + '/rights',
