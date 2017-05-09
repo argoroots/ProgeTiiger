@@ -2,6 +2,8 @@ var PAGE_URL = 'http://konkurss.progetiiger.ee/'
 var API_URL  = 'https://hitsa.entu.ee/api2/'
 var API_USER = 746
 var API_KEY  = 'qb8z5GGdFxvnMKxRN6N3vuj3kUB47LKk'
+var ENTITY_VOTERS = 3773
+var ENTITY_WORKS = 749
 
 
 
@@ -107,7 +109,7 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
             $scope.key = makeKey()
             $http({
                     method : 'POST',
-                    url    : API_URL + 'entity-747',
+                    url    : API_URL + 'entity-' + ENTITY_VOTERS,
                     data   : getSignedData(API_USER, API_KEY, {
                         'definition': 'pd-voter',
                         'pd-voter-email': $scope.email,
@@ -194,7 +196,7 @@ angular.module('pdApp', ['ngRoute', 'ngResource'])
 
                 $http({
                         method : 'GET',
-                        url    : API_URL + 'entity-749/childs',
+                        url    : API_URL + 'entity-' + ENTITY_WORKS + '/childs',
                         params : getSignedData(API_USER, API_KEY, {
                             definition: 'pd-work',
                             limit: '1000'
